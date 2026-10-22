@@ -1,22 +1,27 @@
 # Movie Recommendation System
-A machine learning-based recommendation engine that suggests movies to users based on their preferences using collaborative filtering and/or content-based filtering.
 
-Features
-  1. Collaborative Filtering using Matrix Factorization (SVD, KNN)
+A Streamlit recommendation application that suggests movies using precomputed similarity data and displays poster artwork from The Movie Database API.
 
-  2. Content-Based Filtering based on movie metadata (genre, keywords, cast, etc.)
+## Recommendation flow
 
-  3. Hybrid model support (optional)
+1. Load the serialized movie catalogue and similarity matrix.
+2. Select a movie from the Streamlit dropdown.
+3. Find the nearest items in the similarity space.
+4. Display five recommendations and their poster images.
 
-  4. Popularity-based fallback recommendations
+## Technology
 
-  5. Clean and interactive UI (Streamlit or Flask)
+Python · Pandas · Streamlit · Requests · pickle-based model artifacts · TMDB API
 
-  6. Model evaluation using RMSE, precision, recall, etc.
+## Run locally
 
-Machine Learning Models
-  1. Content-Based: TF-IDF / CountVectorizer + Cosine Similarity
+```bash
+pip install streamlit pandas requests
+streamlit run app.py
+```
 
-  2. Collaborative Filtering: Surprise library with SVD, KNNBasic, etc.
+The app expects the serialized movie data and similarity artifacts referenced by `app.py`. Configure the TMDB API key through an environment variable before sharing or deploying the app; never commit API keys.
 
-  3. Hybrid (optional): Weighted average of both approaches
+## Evaluation ideas
+
+For a stronger production system, compare content-based and collaborative filtering baselines, measure ranking quality with precision@k/recall@k, handle cold-start users, and cache poster requests.
